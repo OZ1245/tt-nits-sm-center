@@ -1,21 +1,31 @@
-# sm-center
+# SM CENTER
 
-## Project setup
+Тестовое задание для [НИЦ "Системы управления"](https://sm-center.ru).
+
+## Стек
+
+Vue.js 2, Vuex, Vue Router, Sass/SCSS
+
+## Инициализация проекта
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Компиляция для разработки
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Компиляция для продакшен
+
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Линтер
+
 ```
 npm run lint
 ```
