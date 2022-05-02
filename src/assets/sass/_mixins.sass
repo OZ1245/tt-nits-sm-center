@@ -1,0 +1,17 @@
+@import "variables"
+
+=Size($width: auto, $height: false)
+  width: $width
+
+  @if $height
+    height: $height
+
+  @else
+    height: $width
+
+=Text($size: 14px, $height: 100%, $color: $cBlack, $weight: 400)
+  font-family: 'Arial', sans-serif
+  font-size: $size
+  line-height: $height
+  font-weight: $weight
+  color: $color

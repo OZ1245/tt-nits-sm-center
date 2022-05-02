@@ -1,32 +1,56 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div class="page">
+    <Header />
+    <div id="app">
+      <router-view/>
     </div>
-    <router-view/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+  import Header from '@/components/common/Header.vue'
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  export default {
+    name: 'App',
+    components: {
+      Header,
     }
   }
-}
+</script>
+
+<style lang="sass">
+@import "assets/font-awesome/scss/font-awesome.scss"
+@import "assets/sass/mixins"
+@import "assets/sass/variables"
+
+*
+  box-sizing: border-box
+
+html
+  min-height: 100vh
+
+body
+  margin: 0
+
+#app
+  +Size(100%, 100%)
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  section
+    max-width: 100%
+    height: 100%
+
+    @media screen and (min-width: map-get($gBreakpoints, sm))
+      max-width: 600px
+
+    @media screen and (min-width: map-get($gBreakpoints, md))
+      max-width: 1024px
+
+    @media screen and (min-width: map-get($gBreakpoints, lg))
+      max-width: 1200px
+
+    @media screen and (min-width: map-get($gBreakpoints, xl))
+      max-width: 1540px
 </style>
