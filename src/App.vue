@@ -1,9 +1,7 @@
 <template>
-  <div class="page">
+  <div id="app">
     <Header />
-    <div id="app">
-      <router-view/>
-    </div>
+    <router-view/>
   </div>
 </template>
 
@@ -39,6 +37,7 @@ body
   align-items: center
 
   section
+    width: 100%
     max-width: 100%
     height: 100%
 
