@@ -1,6 +1,9 @@
 <template>
   <header class="header">
-    <RouterLink v-if="$route.name !== 'Home'">
+    <RouterLink
+      v-if="$route.name !== 'Home'"
+      to="/"
+    >
       <i class="fa fa-arrow-left header__icon-back" aria-hidden="true"></i>
     </RouterLink>
     <h1 class="header__title">
@@ -15,7 +18,9 @@
     computed: {
       title() {
         if (this.$route.name !== 'Home') {
-          return this.$route.meta.title + ' ' + (this.$route.params.id) ? this.$route.params.id : ''
+          // TODO
+          // return `${this.$route.meta.title}: ${(this.$route.params.username) ? this.$route.params.username : ''}`
+          return this.$route.meta.title
         } else {
           return this.$route.meta.title
         }

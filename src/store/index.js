@@ -9,7 +9,8 @@ export default new Vuex.Store({
     isLoaded: false,
     users: [],
     perView: 10,
-    page: 1
+    page: 1,
+    seed: null
   },
   mutations: {
     SET_USERS (state, data) {
@@ -23,12 +24,23 @@ export default new Vuex.Store({
     },
     SET_PAGE (state, value) {
       state.page = value
+    },
+    SET_SEED (state, value) {
+      state.seed = value
     }
   },
   actions: {
     async setUsers({ commit, state }) {
-      const fetchData = await fetchUsers(state.perView, state.page)
+      const params = {
+        results: state.perView,
+        page: state.page,
+        seed: state.seed
+      }
+
+      const fetchData = await fetchUsers(params)
+
       commit('SET_USERS', fetchData.results)
+      commit('SET_SEED', fetchData.info.seed)
     },
     setLoadedStatus({ commit }, state) {
       commit('SET_LOADED_STATUS', state)
@@ -50,12 +62,9 @@ export default new Vuex.Store({
   }
 })
 
-async function fetchUsers(perView, page) {
+async function fetchUsers(params) {
   const response = await axios.get('https://randomuser.me/api/', {
-    params: {
-      results: perView,
-      page: page
-    }
+    params: params
   })
 
   return response.data

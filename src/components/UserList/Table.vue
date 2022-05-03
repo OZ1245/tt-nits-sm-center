@@ -15,6 +15,7 @@
         <tr
           v-for="(item, i) in data"
           :key="i"
+          @click="$router.push({ name: 'User', params: { uuid: item.login.uuid } })"
         >
           <td>{{ `${item.name.first} ${item.name.last}` }}</td>
           <td>{{ item.email }}</td>

@@ -14,17 +14,8 @@ const routes = [
       title: 'Главная'
     }
   },
-  // {
-  //   path: '/user',
-  //   // beforeEnter: (to, from, next) => {
-  //   beforeEnter: (_, __, next) => {
-  //     next(vm => {
-  //       vm.$route.push('/')
-  //     })
-  //   }
-  // },
   {
-    path: '/user/:id',
+    path: '/user/:uuid',
     name: 'User',
     component: User,
     meta: {
