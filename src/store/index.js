@@ -20,13 +20,14 @@ export default new Vuex.Store({
     },
     SET_PERVIEW (state, value) {
       state.perView = value
+    },
+    SET_PAGE (state, value) {
+      state.page = value
     }
   },
   actions: {
     async setUsers({ commit, state }) {
-      console.log('--- setUsers action ---')
       const fetchData = await fetchUsers(state.perView, state.page)
-      console.log('fetchData:', fetchData)
       commit('SET_USERS', fetchData.results)
     },
     setLoadedStatus({ commit }, state) {
@@ -34,6 +35,11 @@ export default new Vuex.Store({
     },
     setPerView({ commit }, value) {
       commit('SET_PERVIEW', value)
+    },
+    setPage({ commit }, value) {
+      console.log('--- setPage action ---')
+      console.log('value:', value)
+      commit('SET_PAGE', value)
     }
   },
   getters: {
@@ -45,10 +51,6 @@ export default new Vuex.Store({
 })
 
 async function fetchUsers(perView, page) {
-  console.log('--- fetchUsers action ---')
-  console.log('perView:', perView)
-  console.log('page:', page)
-
   const response = await axios.get('https://randomuser.me/api/', {
     params: {
       results: perView,

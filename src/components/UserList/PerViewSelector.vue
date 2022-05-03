@@ -40,29 +40,19 @@
         'setPerView'
       ]),
       changeHandler() {
-        console.log('--- changeHandler method ---')
-        console.log('this.model:', this.model)
         this.setPerView(this.model)
         this.$emit('select', this.model)
       }
     },
     mounted() {
-      console.log('--- mounted hook ---')
-      console.log('this.perView:', this.perView)
-      console.log('this.model:', this.model)
       this.model = this.perView
-      console.log(this)
-    },
-    updated() {
-      console.log('--- updated hook ---')
-      console.log('this.model:', this.model)
     }
   }
 </script>
 
 <style lang="sass" scoped>
-  @import "../assets/sass/variables"
-  @import "../assets/sass/mixins"
+  @import "../../assets/sass/variables"
+  @import "../../assets/sass/mixins"
 
   .perview
     +Text()
