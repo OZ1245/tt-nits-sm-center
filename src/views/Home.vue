@@ -5,12 +5,21 @@
 </template>
 
 <script>
-import UserList from '@/components/UserList/UserList'
+  import { mapActions } from 'vuex'
+  import UserList from '@/components/UserList/UserList'
 
-export default {
-  name: 'Home',
-  components: {
-    UserList
+  export default {
+    name: 'Home',
+    components: {
+      UserList
+    },
+    methods: {
+      ...mapActions([
+        'clearUUID'
+      ])
+    },
+    created() {
+      this.clearUUID()
+    }
   }
-}
 </script>

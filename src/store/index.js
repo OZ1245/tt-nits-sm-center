@@ -1,16 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
     isLoaded: false,
     users: [],
     perView: 10,
     page: 1,
-    seed: null
+    seed: null,
+    uuid: null
   },
   mutations: {
     SET_USERS (state, data) {
@@ -27,6 +30,9 @@ export default new Vuex.Store({
     },
     SET_SEED (state, value) {
       state.seed = value
+    },
+    SET_UUID (state, value) {
+      state.uuid = value
     }
   },
   actions: {
@@ -52,13 +58,35 @@ export default new Vuex.Store({
       console.log('--- setPage action ---')
       console.log('value:', value)
       commit('SET_PAGE', value)
+    },
+    setUUID({ commit }, value) {
+      commit('SET_UUID', value)
+    },
+    clearUUID({ commit }) {
+      commit('SET_UUID', null)
     }
   },
   getters: {
     isLoaded: state => state.isLoaded,
     getUsers: state => state.users,
+    getUser: state => {
+      console.log('--- getUser getter ---')
+      console.log('uuid:', state.uuid)
+      let user
+
+      if (state.uuid) {
+        user = state.users.find((user) => {
+          return user.login.uuid === state.uuid
+        })
+      } else {
+        user = user[0]
+      }
+      console.log('user:', user)
+
+      return user
+    },
     getPerView: state => state.perView,
-    getPage: state => state.page
+    getPage: state => state.page,
   }
 })
 

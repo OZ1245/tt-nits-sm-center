@@ -13,16 +13,16 @@
       </thead>
       <tbody>
         <tr
-          v-for="(item, i) in data"
+          v-for="(user, i) in data"
           :key="i"
-          @click="$router.push({ name: 'User', params: { uuid: item.login.uuid } })"
+          @click="getUser(user.login.uuid)"
         >
-          <td>{{ `${item.name.first} ${item.name.last}` }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.phone }}</td>
-          <td>{{ item.dob.age }}</td>
-          <td>{{ item.nat }}</td>
-          <td>{{ item.registered.date | moment('MM/DD/YYYY') }}</td>
+          <td>{{ `${user.name.first} ${user.name.last}` }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.dob.age }}</td>
+          <td>{{ user.nat }}</td>
+          <td>{{ user.registered.date | moment('MM/DD/YYYY') }}</td>
         </tr>
       </tbody>
     </table>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+  import { mapActions, mapGetters } from 'vuex'
+
   export default {
     name: 'Table',
     props: {
@@ -50,6 +52,22 @@
           'NAT',
           'Registered'
         ]
+      }
+    },
+    computed: {
+      ...mapGetters({
+        user: 'getUser'
+      })
+    },
+    methods: {
+      ...mapActions([
+        'setUUID',
+      ]),
+      getUser(uuid) {
+        console.log('--- getUser method ---')
+        console.log('uuid:', uuid)
+        this.setUUID(uuid)
+        this.$router.push({ name: 'User', params: { username: this.user.login.username } })
       }
     }
   }

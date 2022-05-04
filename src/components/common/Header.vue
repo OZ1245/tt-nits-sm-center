@@ -18,9 +18,7 @@
     computed: {
       title() {
         if (this.$route.name !== 'Home') {
-          // TODO
-          // return `${this.$route.meta.title}: ${(this.$route.params.username) ? this.$route.params.username : ''}`
-          return this.$route.meta.title
+          return `${this.$route.meta.title}: ${this.$route.params.username}`
         } else {
           return this.$route.meta.title
         }
