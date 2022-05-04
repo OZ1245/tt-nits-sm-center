@@ -1,35 +1,48 @@
 <template>
   <div class="user-card">
-    <div class="user-card__img-wrap">
+    <div
+      class="user-card__img-wrap"
+      @click="showPicture = true"
+    >
       <div class="user-card__img">
         <img :src="user.picture.medium" :alt="user.login.username">
       </div>
-      <button
-        class="user-card__zoom"
-        @click="showPicture"
-      >
+      <div class="user-card__icon">
         <i class="fa fa-search-plus" aria-hidden="true"></i>
-      </button>
+      </div>
     </div>
+
+    <VueEasyLightbox
+      escDisabled
+      moveDisabled
+      :visible="showPicture"
+      :imgs="user.picture.large"
+      @hide="showPicture = false"
+    />
 
     <h2 class="user-card__name">
       {{ user.name.first }} {{ user.name.last }}
     </h2>
 
     <Tabs :header="tabs.header" :data="tabs.data" />
-    <!-- TODO -->
-    <pre>{{ user }}</pre>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
+  import VueEasyLightbox from 'vue-easy-lightbox'
   import Tabs from '@/components/UserCard/Tabs'
 
   export default {
     name: 'UserCard',
     components: {
-      Tabs
+      Tabs,
+      VueEasyLightbox
+    },
+    data() {
+      return {
+        showPicture: false
+      }
     },
     computed: {
       ...mapGetters({
@@ -138,11 +151,6 @@
             }
           ]
         }
-      },
-      methods: {
-        showPicture() {
-
-        }
       }
     },
     mounted() {
@@ -151,3 +159,52 @@
     }
   }
 </script>
+
+<style lang="sass" scoped>
+  @import "../../assets/sass/variables"
+  @import "../../assets/sass/mixins"
+
+  .user-card
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding: $gGutter 0
+
+    &__img-wrap
+      +Size(100px)
+      position: relative
+      border-radius: 50%
+      overflow: hidden
+      margin-bottom: $gGutter
+
+      &:hover
+        cursor: pointer
+
+        .user-card__icon
+          bottom: 0
+          transition: bottom .15s
+
+    &__img
+      +Size(100%)
+
+      img
+        +Size(100%)
+        object-fit: cover
+
+    &__icon
+      width: 100%
+      display: flex
+      justify-content: center
+      position: absolute
+      left: 0
+      bottom: -100%
+      background-color: rgba($cGray, 50%)
+      font-size: 18px
+      color: $cWhite
+      padding: 5px
+      transition: bottom .3s
+
+    &__name
+      +Text(24px)
+      margin: 0 0 $gGutter
+</style>

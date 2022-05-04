@@ -11,7 +11,7 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: {
-      title: 'Главная'
+      title: 'Home'
     }
   },
   {
@@ -19,7 +19,7 @@ const routes = [
     name: 'User',
     component: User,
     meta: {
-      title: 'Пользователь'
+      title: 'User'
     }
   },
 ]
